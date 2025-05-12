@@ -1,9 +1,12 @@
 package com.scaler.productservicemay25.services;
 
 import com.scaler.productservicemay25.model.Product;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FakeStoreProductService implements ProductService {
 
 
