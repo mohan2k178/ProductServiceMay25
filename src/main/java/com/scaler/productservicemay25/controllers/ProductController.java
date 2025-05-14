@@ -1,8 +1,10 @@
 package com.scaler.productservicemay25.controllers;
 
 
+import com.scaler.productservicemay25.exceptions.ProductNotFoundException;
 import com.scaler.productservicemay25.model.Product;
 import com.scaler.productservicemay25.services.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,20 @@ public class ProductController {
     }
 
     @GetMapping( "/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId){
-        return productService.getSingleProduct(productId);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+        //Throw NewException
+
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(productService.getSingleProduct(productId), HttpStatus.OK);
+//        Product product = null;
+//        try {
+//            product = productService.getSingleProduct(productId);
+//            responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+//        } catch (RuntimeException e) {
+//            e.printStackTrace();
+//            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//
+//        }
+        return responseEntity;
     }
 
     @GetMapping( "/")
