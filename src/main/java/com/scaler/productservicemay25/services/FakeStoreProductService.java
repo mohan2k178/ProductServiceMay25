@@ -16,11 +16,10 @@ import java.util.List;
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
      private RestTemplate restTemplate;
-     private ProductNotFoundExceptionDto productNotFoundExceptionDto;
+
 
      public FakeStoreProductService(RestTemplate restTemplate, ProductNotFoundExceptionDto productNotFoundExceptionDto) {
          this.restTemplate = restTemplate;
-         this.productNotFoundExceptionDto = productNotFoundExceptionDto;
      }
 
     @Override
@@ -31,8 +30,7 @@ public class FakeStoreProductService implements ProductService {
          //convert dto model
 
         if(fakeStoreProductDto == null) {
-            productNotFoundExceptionDto.setProductId(productId);
-            throw new ProductNotFoundException("Product with id "+productId+" doesn't exist");
+            throw new ProductNotFoundException(productId, "Product with id "+productId+" doesn't exist");
 
         }
          return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
@@ -58,8 +56,8 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public boolean deleteProduct(Long productId) {
-        return false;
+    public void deleteProduct(Long productId) {
+
     }
 
     private static Product convertFakeStoreProductDtoToProduct(FakeStoreProductDto fakeStoreProductDto) {

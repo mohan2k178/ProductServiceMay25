@@ -27,11 +27,11 @@ public class ProductServiceExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ProductNotFoundExceptionDto> handleProductNotFoundException() {
+    public ResponseEntity<ProductNotFoundExceptionDto> handleProductNotFoundException(ProductNotFoundException e) {
         ProductNotFoundExceptionDto exceptionDto = new ProductNotFoundExceptionDto();
-        exceptionDto.setMessage("Product not found");
+        exceptionDto.setMessage(e.getMessage());
         exceptionDto.setResolution("Please try again with a valid product id");
-        exceptionDto.setProductId(productNotFoundExceptionDto.getProductId());
+        exceptionDto.setProductId(e.getProductId());
         return new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
     }
 }

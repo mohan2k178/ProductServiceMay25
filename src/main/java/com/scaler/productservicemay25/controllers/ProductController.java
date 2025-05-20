@@ -1,6 +1,7 @@
 package com.scaler.productservicemay25.controllers;
 
 
+import com.scaler.productservicemay25.exceptions.CategoryNotFoundException;
 import com.scaler.productservicemay25.exceptions.ProductNotFoundException;
 import com.scaler.productservicemay25.model.Product;
 import com.scaler.productservicemay25.services.ProductService;
@@ -45,13 +46,15 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product createProduct(@RequestBody Product product){
-        return new Product();
+    public Product createProduct(@RequestBody Product product) throws CategoryNotFoundException {
+
+        return productService.createProduct(product);
     }
 
     @DeleteMapping( "/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long productId){
-        return null;
+    public void deleteProduct(@PathVariable("id") Long productId){
+
+        productService.deleteProduct(productId);
     }
 
 }
