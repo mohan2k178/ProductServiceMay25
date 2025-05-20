@@ -21,6 +21,7 @@ public class ProductServiceExceptionHandler {
     public ResponseEntity<ExceptionDto> handleRuntimeException() {
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("Something went wrong");
+        //exceptionDto.setMessage("Something went wrong");
         exceptionDto.setResolutionDetails("hdhdhdhhdhdhdhdhdhdhd");
         return new ResponseEntity<>(exceptionDto, HttpStatus.UNAUTHORIZED);
     }
