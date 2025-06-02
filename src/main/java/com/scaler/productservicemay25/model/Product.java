@@ -1,8 +1,8 @@
 package com.scaler.productservicemay25.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +17,9 @@ public class Product extends BaseModel{
     private String description;
     private String imageUrl;
     @ManyToOne
+    @JoinColumn
+    //@JsonBackReference
+   // @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Category category;
 
 

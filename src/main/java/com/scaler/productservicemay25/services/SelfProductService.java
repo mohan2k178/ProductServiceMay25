@@ -49,19 +49,19 @@ public class SelfProductService implements ProductService{
 
     @Override
     public Product createProduct(Product product) throws CategoryNotFoundException {
-        Category category = product.getCategory();
-        if(category == null){
-           throw new CategoryNotFoundException("Invalid Category. Please try agian with Category");
-        }
-
-        Optional<Category> optionalCategory = categoryRepository.findByTitle(category.getTitle());
-
-        if(optionalCategory.isEmpty()){
-            category = categoryRepository.save(category);
-        }else{
-            category = optionalCategory.get();
-        }
-        product.setCategory(category);
+//        Category category = product.getCategory();
+//        if(category == null){
+//           throw new CategoryNotFoundException("Invalid Category. Please try agian with Category");
+//        }
+//
+//        Optional<Category> optionalCategory = categoryRepository.findByTitle(category.getTitle());
+//
+//        if(optionalCategory.isEmpty()){
+//            category = categoryRepository.save(category);
+//        }else{
+//            category = optionalCategory.get();
+//        }
+//        product.setCategory(category);
 
         return productRepository.save(product);
     }

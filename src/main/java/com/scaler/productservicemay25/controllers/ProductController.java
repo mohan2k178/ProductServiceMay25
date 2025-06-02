@@ -19,15 +19,18 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(@Qualifier("selfProductService") ProductService productService) {
-        this.productService = productService;
+//    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+      public ProductController(ProductService productService) {
+         this.productService = productService;
     }
 
     @GetMapping( "/{id}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+    public Product getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
         //Throw NewException
 
-        ResponseEntity<Product> responseEntity = new ResponseEntity<>(productService.getSingleProduct(productId), HttpStatus.OK);
+     //   ResponseEntity<Product> responseEntity = new ResponseEntity<>(productService.getSingleProduct(productId), HttpStatus.OK);
+
+          return productService.getSingleProduct(productId);
 //        Product product = null;
 //        try {
 //            product = productService.getSingleProduct(productId);
@@ -37,7 +40,7 @@ public class ProductController {
 //            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //
 //        }
-        return responseEntity;
+        //return responseEntity;
     }
 
     @GetMapping( "/")
