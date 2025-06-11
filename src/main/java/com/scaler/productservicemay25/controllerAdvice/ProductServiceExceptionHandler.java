@@ -3,6 +3,7 @@ package com.scaler.productservicemay25.controllerAdvice;
 import com.scaler.productservicemay25.dtos.ExceptionDto;
 import com.scaler.productservicemay25.dtos.ProductNotFoundExceptionDto;
 import com.scaler.productservicemay25.exceptions.ProductNotFoundException;
+import com.scaler.productservicemay25.exceptions.InvalidTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,6 +18,14 @@ public class ProductServiceExceptionHandler {
         this.productNotFoundExceptionDto = productNotFoundExceptionDto;
     }
 
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ExceptionDto> handleInvalidToken(InvalidTokenException ex) {
+        ExceptionDto dto = new ExceptionDto();
+        dto.setMessage(ex.getMessage());                 // "Invalid token provided"
+        dto.setResolutionDetails("Token is missing or invalid");
+        return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
+    }
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionDto> handleRuntimeException() {
         ExceptionDto exceptionDto = new ExceptionDto();
@@ -34,4 +43,6 @@ public class ProductServiceExceptionHandler {
         exceptionDto.setProductId(e.getProductId());
         return new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
     }
+
+
 }
